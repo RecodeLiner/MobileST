@@ -1,5 +1,6 @@
 package com.rcl.mobilest
 
+import android.content.Intent
 import android.graphics.Color.TRANSPARENT
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,8 +12,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 import com.arkivanov.decompose.retainedComponent
 import com.rcl.mobilest.components.RootComponent
+import com.rcl.mobilest.components.RootComponent.TopLevelConfiguration.SettingsScreenConfiguration
 import com.rcl.mobilest.components.RootComponentImpl
 import com.rcl.mobilest.di.theme.ThemeManager
 import com.rcl.mobilest.ui.theme.MobileSTTheme
@@ -37,6 +40,13 @@ class MainActivity : ComponentActivity(), KoinComponent {
         enableEdgeToEdge(
             navigationBarStyle = SystemBarStyle.auto(TRANSPARENT, TRANSPARENT)
         )
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        //handle intent, currently only work for enable "settings"
+        //in android's app settings
+        handleIntent(this.intent)
+
+
         setContent {
             MobileSTTheme(themeManager = themeManager) {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -44,6 +54,24 @@ class MainActivity : ComponentActivity(), KoinComponent {
                         RootComponentImpl(rootComponent)
                     }
                 }
+            }
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        handleIntent(intent)
+        super.onNewIntent(intent)
+    }
+
+    private fun handleIntent(intent: Intent) {
+        val action = intent.action
+
+        when (action) {
+            Intent.ACTION_APPLICATION_PREFERENCES -> {
+                rootComponent.navigateTo(SettingsScreenConfiguration)
+            }
+            else -> {
+
             }
         }
     }

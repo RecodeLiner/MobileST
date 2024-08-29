@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MobileST</string>
+    <string name="bottom_home">Home</string>
+    <string name="bottom_settings">Settings</string>
 </resources>
