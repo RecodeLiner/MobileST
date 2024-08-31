@@ -3,4 +3,12 @@
     <string name="app_name">MobileST</string>
     <string name="bottom_home">Главная</string>
     <string name="bottom_settings">Настройки</string>
+    <string name="start_measure">Начать</string>
+    <string name="up_speed_res">Исходящая скорость: %1$s мб/c</string>
+    <string name="down_speed_res">Входящая скорость: %1$s мб/c</string>
+    <string name="unavailable">Недоступно</string>
+    <string name="restart">Перезапуск</string>
+    <string name="error">Ошибка</string>
+    <string name="upstream">Исходящая скорость</string>
+    <string name="downstream">Входящая скорость</string>
 </resources>
