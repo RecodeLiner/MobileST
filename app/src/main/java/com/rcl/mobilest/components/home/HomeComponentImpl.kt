@@ -43,9 +43,9 @@ fun HomeComponentImpl(homeComponent: HomeComponent) {
                     Text(
                         stringResource(
                             id = R.string.up_speed_res,
-                            (if (isUpstreamEnabled) (((state as HomeComponent.State.Result).res.upSpeed?.times(
-                                8
-                            ) ?: 0) / 1024).toString() else stringResource(
+                            (if (isUpstreamEnabled) ((state as HomeComponent.State.Result).res.upSpeed?.div(
+                                1024
+                            )).toString() else stringResource(
                                 R.string.unavailable
                             ))
                         )
@@ -53,9 +53,9 @@ fun HomeComponentImpl(homeComponent: HomeComponent) {
                     Text(
                         stringResource(
                             id = R.string.down_speed_res,
-                            (if (isDownstreamEnabled) (((state as HomeComponent.State.Result).res.downSpeed?.times(
-                                8
-                            ) ?: 0) / 1024).toString() else stringResource(
+                            (if (isDownstreamEnabled) ((state as HomeComponent.State.Result).res.downSpeed?.div(
+                                1024
+                            )).toString() else stringResource(
                                 R.string.unavailable
                             ))
                         )
