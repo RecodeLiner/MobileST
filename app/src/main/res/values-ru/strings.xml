@@ -6,9 +6,13 @@
     <string name="start_measure">Начать</string>
     <string name="up_speed_res">Исходящая скорость: %1$s мб/c</string>
     <string name="down_speed_res">Входящая скорость: %1$s мб/c</string>
-    <string name="unavailable">%1%s недоступна из-за настроек</string>
+    <string name="unavailable">%1$s недоступна из-за настроек</string>
     <string name="restart">Перезапуск</string>
     <string name="error">Ошибка</string>
     <string name="upstream">Исходящая скорость</string>
     <string name="downstream">Входящая скорость</string>
+    <string name="theme_title">Тема</string>
+    <string name="dark_theme">Тёмная тема</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="default_theme">Тема по умолчанию</string>
 </resources>

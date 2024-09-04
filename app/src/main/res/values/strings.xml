@@ -5,9 +5,13 @@
     <string name="start_measure">Start</string>
     <string name="up_speed_res">Up speed: %1$s mb/s</string>
     <string name="down_speed_res">Down speed: %1$s mb/s</string>
-    <string name="unavailable">%1%s unavailable due to settings</string>
+    <string name="unavailable">%1$s unavailable due to settings</string>
     <string name="restart">Restart</string>
     <string name="error">Error</string>
     <string name="upstream">Upstream</string>
     <string name="downstream">Downstream</string>
+    <string name="theme_title">Theme</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="light_theme">Light theme</string>
+    <string name="default_theme">Default theme</string>
 </resources>
