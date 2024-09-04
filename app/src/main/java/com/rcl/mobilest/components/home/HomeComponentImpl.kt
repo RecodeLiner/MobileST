@@ -13,7 +13,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.rcl.mobilest.R
@@ -22,15 +21,11 @@ import com.rcl.mobilest.R
 fun HomeComponentImpl(homeComponent: HomeComponent) {
     val state by homeComponent.currentState.collectAsState()
 
-    val context = LocalContext.current
-
     AnimatedContent(state, label = "") {
         when (it) {
             is HomeComponent.State.Idle -> {
                 RestartButton(text = R.string.start_measure, checkConnectivity = {
-                    homeComponent.checkConnectivity(
-                        context = context
-                    )
+                    homeComponent.checkConnectivity()
                 })
             }
 
@@ -68,9 +63,7 @@ fun HomeComponentImpl(homeComponent: HomeComponent) {
                     )
 
                     RestartButton(text = R.string.restart, checkConnectivity = {
-                        homeComponent.checkConnectivity(
-                            context = context
-                        )
+                        homeComponent.checkConnectivity()
                     })
                 }
             }
@@ -82,9 +75,7 @@ fun HomeComponentImpl(homeComponent: HomeComponent) {
                     )
 
                     RestartButton(text = R.string.restart, checkConnectivity = {
-                        homeComponent.checkConnectivity(
-                            context = context
-                        )
+                        homeComponent.checkConnectivity()
                     })
                 }
             }

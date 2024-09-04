@@ -1,6 +1,5 @@
 package com.rcl.mobilest.components.home
 
-import android.content.Context
 import android.net.ConnectivityManager
 import com.arkivanov.decompose.ComponentContext
 import com.rcl.mobilest.di.config.ConfigManager
@@ -12,6 +11,7 @@ import org.koin.core.component.inject
 class HomeComponent(componentContext: ComponentContext) : ComponentContext by componentContext,
     KoinComponent {
     val configManager: ConfigManager by inject()
+    val connectivityManager: ConnectivityManager by inject()
     val currentState = MutableStateFlow<State>(State.Idle)
 
     //TechTask doesn't included this, but id needed, it's possible to update state from main screen
@@ -20,12 +20,11 @@ class HomeComponent(componentContext: ComponentContext) : ComponentContext by co
     }
 
     fun checkConnectivity(
-        context: Context,
+        times: Int = 60,
     ) {
         currentState.value = State.Loading
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        val nc = cm.getNetworkCapabilities(cm.activeNetwork)
+        val nc = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
         val result = if (nc == null) {
             NetworkResult.Failure
         } else {
