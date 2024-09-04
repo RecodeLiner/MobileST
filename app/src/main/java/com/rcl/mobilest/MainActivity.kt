@@ -1,5 +1,6 @@
 package com.rcl.mobilest
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color.TRANSPARENT
 import android.os.Bundle
@@ -7,9 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
@@ -30,6 +29,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
     private lateinit var rootComponent: RootComponent
 
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //"retained" make component full stable
@@ -49,10 +49,8 @@ class MainActivity : ComponentActivity(), KoinComponent {
 
         setContent {
             MobileSTTheme(themeManager = themeManager) {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Box(modifier = Modifier.padding(innerPadding)) {
+                Scaffold(modifier = Modifier.fillMaxSize()) {
                         RootComponentImpl(rootComponent)
-                    }
                 }
             }
         }
