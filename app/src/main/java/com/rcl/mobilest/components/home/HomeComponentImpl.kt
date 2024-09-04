@@ -20,8 +20,6 @@ import com.rcl.mobilest.R
 
 @Composable
 fun HomeComponentImpl(homeComponent: HomeComponent) {
-    val isUpstreamEnabled by homeComponent.configManager.isUpstreamEnabled.collectAsState()
-    val isDownstreamEnabled by homeComponent.configManager.isDownstreamEnabled.collectAsState()
     val state by homeComponent.currentState.collectAsState()
 
     val context = LocalContext.current
@@ -31,9 +29,7 @@ fun HomeComponentImpl(homeComponent: HomeComponent) {
             is HomeComponent.State.Idle -> {
                 RestartButton(text = R.string.start_measure, checkConnectivity = {
                     homeComponent.checkConnectivity(
-                        context = context,
-                        isDownAvailable = isDownstreamEnabled,
-                        isUpAvailable = isUpstreamEnabled
+                        context = context
                     )
                 })
             }
@@ -41,31 +37,39 @@ fun HomeComponentImpl(homeComponent: HomeComponent) {
             is HomeComponent.State.Result -> {
                 Column {
                     Text(
-                        stringResource(
-                            id = R.string.up_speed_res,
-                            (if (isUpstreamEnabled) ((state as HomeComponent.State.Result).res.upSpeed?.div(
-                                1024
-                            )).toString() else stringResource(
-                                R.string.unavailable
-                            ))
-                        )
+                        if (it.res.upSpeed != null) {
+                            stringResource(
+                                id = R.string.up_speed_res,
+                                it.res.upSpeed.div(
+                                    1024
+                                ).toString()
+                            )
+                        } else {
+                            stringResource(
+                                id = R.string.unavailable,
+                                stringResource(R.string.upstream)
+                            )
+                        }
                     )
                     Text(
-                        stringResource(
-                            id = R.string.down_speed_res,
-                            (if (isDownstreamEnabled) ((state as HomeComponent.State.Result).res.downSpeed?.div(
-                                1024
-                            )).toString() else stringResource(
-                                R.string.unavailable
-                            ))
-                        )
+                        if (it.res.downSpeed != null ) {
+                            stringResource(
+                                id = R.string.down_speed_res,
+                                it.res.downSpeed.div(
+                                    1024
+                                ).toString()
+                            )
+                        } else {
+                            stringResource(
+                                id = R.string.unavailable,
+                                stringResource(R.string.downstream)
+                            )
+                        }
                     )
 
                     RestartButton(text = R.string.restart, checkConnectivity = {
                         homeComponent.checkConnectivity(
-                            context = context,
-                            isDownAvailable = isDownstreamEnabled,
-                            isUpAvailable = isUpstreamEnabled
+                            context = context
                         )
                     })
                 }
@@ -79,9 +83,7 @@ fun HomeComponentImpl(homeComponent: HomeComponent) {
 
                     RestartButton(text = R.string.restart, checkConnectivity = {
                         homeComponent.checkConnectivity(
-                            context = context,
-                            isDownAvailable = isDownstreamEnabled,
-                            isUpAvailable = isUpstreamEnabled
+                            context = context
                         )
                     })
                 }

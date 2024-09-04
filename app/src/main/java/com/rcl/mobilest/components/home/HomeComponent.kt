@@ -21,8 +21,6 @@ class HomeComponent(componentContext: ComponentContext) : ComponentContext by co
 
     fun checkConnectivity(
         context: Context,
-        isDownAvailable: Boolean,
-        isUpAvailable: Boolean
     ) {
         currentState.value = State.Loading
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -33,12 +31,12 @@ class HomeComponent(componentContext: ComponentContext) : ComponentContext by co
         } else {
             NetworkResult.Success(
                 downSpeed =
-                if (isDownAvailable)
+                if (configManager.isDownstreamEnabled.value)
                     nc.linkDownstreamBandwidthKbps
                 else
                     null,
                 upSpeed =
-                if (isUpAvailable)
+                if (configManager.isUpstreamEnabled.value)
                     nc.linkUpstreamBandwidthKbps
                 else
                     null
